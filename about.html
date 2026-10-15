@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huzefa Airlines | About & Fleet Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="backToTop" class="back-to-top" title="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Logo" class="logo-img" />
+                <span class="logo-text">Huzefa <span>Airlines</span></span>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="flights.html" class="nav-link">Flights</a>
+                <a href="destinations.html" class="nav-link">Destinations</a>
+                <a href="offers.html" class="nav-link">Offers</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="status.html" class="nav-link"><i class="fa-solid fa-satellite-dish text-gold"></i> Status</a>
+                <a href="admin.html" class="nav-link admin-nav-link" style="display: none !important; color: var(--gold); font-weight:700;"><i class="fa-solid fa-user-shield text-gold"></i> Admin Portal</a>
+                <div class="mobile-auth-btns"></div>
+            </nav>
+            <div class="nav-auth"></div>
+            <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <section class="fleet-section section-padding" style="padding-top: 140px;" id="about">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">FLEET MODULE</span>
+                <h2 class="section-title">Our Modern Aircraft</h2>
+                <p class="section-desc">Fly aboard the world's most advanced and quietest commercial jetliners.</p>
+            </div>
+
+            <div class="fleet-grid">
+                <div class="fleet-card reveal active">
+                    <div class="fleet-img-wrap">
+                        <img src="images/fleet_b787.png" alt="Boeing 787 Dreamliner">
+                    </div>
+                    <div class="fleet-details">
+                        <h3>Boeing 787 Dreamliner</h3>
+                        <ul class="fleet-specs">
+                            <li><i class="fa-solid fa-users"></i> Capacity: 290 Seats</li>
+                            <li><i class="fa-solid fa-gauge-high"></i> Speed: Mach 0.85</li>
+                            <li><i class="fa-solid fa-wifi"></i> Free High-Speed 5G Wi-Fi</li>
+                            <li><i class="fa-solid fa-bed"></i> 180° Flatbed Suites</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="fleet-card reveal active">
+                    <div class="fleet-img-wrap">
+                        <img src="images/fleet_a350.png" alt="Airbus A350-1000">
+                    </div>
+                    <div class="fleet-details">
+                        <h3>Airbus A350-1000</h3>
+                        <ul class="fleet-specs">
+                            <li><i class="fa-solid fa-users"></i> Capacity: 350 Seats</li>
+                            <li><i class="fa-solid fa-gauge-high"></i> Speed: Mach 0.85</li>
+                            <li><i class="fa-solid fa-volume-xmark"></i> Whispering Quiet Airflow</li>
+                            <li><i class="fa-solid fa-utensils"></i> Live Gourmet Catering</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="fleet-card reveal active">
+                    <div class="fleet-img-wrap">
+                        <img src="images/fleet_b777.png" alt="Boeing 777-300ER">
+                    </div>
+                    <div class="fleet-details">
+                        <h3>Boeing 777-300ER</h3>
+                        <ul class="fleet-specs">
+                            <li><i class="fa-solid fa-users"></i> Capacity: 396 Seats</li>
+                            <li><i class="fa-solid fa-gauge-high"></i> Speed: Mach 0.84</li>
+                            <li><i class="fa-solid fa-tv"></i> 4K 32" Personal Screens</li>
+                            <li><i class="fa-solid fa-shield-halved"></i> Private First Class Suite</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cabin Experience Section -->
+    <section class="experience-section section-padding">
+        <div class="container">
+            <div class="experience-card glass-card reveal active">
+                <div class="experience-img-container">
+                    <img src="images/cabin_suite.png" alt="Huzefa First Class Private Suite">
+                    <div class="experience-badge"><i class="fa-solid fa-crown text-gold"></i> 7-Star First Suite</div>
+                </div>
+                <div class="experience-content">
+                    <span class="section-subtitle">IN-FLIGHT SANCTUARY</span>
+                    <h2 class="section-title">Award-Winning Cabin Interiors</h2>
+                    <p class="experience-desc">Every aircraft in the Huzefa fleet is equipped with hand-crafted Italian leather seats, custom mood lighting engineered to combat jet lag, and private suites built for ultimate relaxation.</p>
+                    <ul class="experience-features">
+                        <li><i class="fa-solid fa-check text-gold"></i> Noise-Cancelling Acoustic Cabins</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> HD Touchscreen Entertainment System</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> Premium Culinary & Beverage Service</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Huzefa Airlines. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

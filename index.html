@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Theme: apply saved preference before paint to prevent flash -->
+    <script>!function(){var t=localStorage.getItem('huzefa-theme')||( window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Huzefa Airlines | Fly Beyond Expectations</title>
+    <meta name="description" content="Experience award-winning 7-star luxury aviation with Huzefa Airlines. Book flights, manage itineraries, and earn Huzefa Miles.">
+    <meta name="theme-color" content="#071a3d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="images/logo_gold.png">
+    <link rel="apple-touch-icon" href="images/logo_gold.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ── Dark / Light Toggle ── -->
+    <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Switch to light mode" title="Switch to light mode">
+        <i id="themeToggleIcon" class="fa-solid fa-sun"></i>
+        <span id="themeToggleLabel">Light</span>
+    </button>
+
+    <button id="backToTop" class="back-to-top" title="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <!-- Huzefa Airlines AI Virtual Assistant Floating Widget -->
+    <div class="ai-agent-wrapper" id="aiAgentWrapper">
+        <!-- Floating Trigger Button -->
+        <button type="button" class="ai-agent-trigger" id="aiAgentTriggerBtn" aria-label="Open Huzefa Airlines AI Assistant">
+            <div class="ai-trigger-pulse"></div>
+            <div class="ai-trigger-badge"><span class="status-dot"></span> AI Online</div>
+            <div class="ai-trigger-icon">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+            <span class="ai-trigger-label">Huzefa AI</span>
+        </button>
+
+        <!-- Glassmorphic AI Assistant Chat Window -->
+        <div class="ai-agent-window" id="aiAgentWindow">
+            <div class="ai-chat-header">
+                <div class="ai-profile-info">
+                    <div class="ai-avatar-wrap">
+                        <img src="images/logo_gold.png" alt="Huzefa AI" class="ai-avatar-img" />
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div class="ai-meta">
+                        <h4>Huzefa Airlines AI</h4>
+                        <span class="ai-role"><i class="fa-solid fa-sparkles text-gold"></i> Official Virtual Assistant</span>
+                    </div>
+                </div>
+                <div class="ai-header-actions">
+                    <button type="button" class="ai-action-btn" id="aiVoiceToggleBtn" title="Toggle Voice Response (Speech)"><i class="fa-solid fa-volume-high"></i></button>
+                    <button type="button" class="ai-action-btn" id="aiMinimizeBtn" title="Minimize"><i class="fa-solid fa-minus"></i></button>
+                    <button type="button" class="ai-action-btn" id="aiCloseBtn" title="Close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+
+            <div class="ai-chat-body" id="aiChatBody">
+                <div class="ai-message assistant-msg">
+                    <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="msg-content">
+                        <p>Welcome to <strong>Huzefa Airlines</strong>! ✈️</p>
+                        <p>I am <strong>Huzefa Airlines AI Pro</strong>, your virtual assistant. How may I assist with your travel plans today?</p>
+                        <div class="msg-time">Just now</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Action Suggestion Chips -->
+            <div class="ai-quick-chips" id="aiQuickChips">
+                <button type="button" class="chip-btn" data-query="Flight Availability">✈️ Flight Availability</button>
+                <button type="button" class="chip-btn" data-query="Baggage Allowance">🧳 Baggage Rules</button>
+                <button type="button" class="chip-btn" data-query="Check-in and Seat Selection">🎫 Check-in & Seats</button>
+                <button type="button" class="chip-btn" data-query="Huzefa Club Rewards">👑 Huzefa Club</button>
+            </div>
+
+            <!-- Chat Input Controls -->
+            <form class="ai-chat-input-form" id="aiChatForm">
+                <button type="button" class="ai-mic-btn" id="aiMicBtn" title="Speak question (Microphone)"><i class="fa-solid fa-microphone"></i></button>
+                <input type="text" id="aiChatInput" placeholder="Ask or speak questions..." autocomplete="off" />
+                <button type="submit" class="ai-send-btn" id="aiSendBtn" aria-label="Send message">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Logo" class="logo-img" />
+                <span class="logo-text">Huzefa <span>Airlines</span></span>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="flights.html" class="nav-link">Flights</a>
+                <a href="destinations.html" class="nav-link">Destinations</a>
+                <a href="offers.html" class="nav-link">Offers</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="status.html" class="nav-link"><i class="fa-solid fa-satellite-dish text-gold"></i> Status</a>
+                <a href="admin.html" class="nav-link admin-nav-link" style="display: none !important; color: var(--gold); font-weight:700;"><i class="fa-solid fa-user-shield text-gold"></i> Admin Portal</a>
+                <div class="mobile-auth-btns">
+                    <button type="button" onclick="logoutUser()" class="btn btn-gold" style="width:100%; padding:0.6rem; font-size:0.88rem;">
+                        <i class="fa-solid fa-power-off"></i> Log Out
+                    </button>
+                </div>
+            </nav>
+            <div class="nav-auth" style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="color: var(--white); font-weight: 600; font-size: 0.9rem;" id="headerUserName">Member</span>
+                <button type="button" onclick="logoutUser()" class="btn btn-gold" style="padding: 0.45rem 1rem; font-size: 0.85rem; border-radius: 20px;">
+                    <i class="fa-solid fa-power-off"></i> Log Out
+                </button>
+            </div>
+            <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Hero Section with Multi-Panel In-Flight Visual Background & 3D WebGL Depth Viewport -->
+    <section class="hero hero-3d-viewport" id="home">
+        <!-- Scroll-Driven Multi-Perspective Visual Background Panels -->
+        <div class="hero-flight-viewport" id="heroFlightViewport">
+            <!-- Perspective 1: Daytime Airplane Wing Over Cloud Ocean -->
+            <div class="hero-panel hero-panel-wing-day active-panel" id="heroPanelWingDay">
+                <img src="images/airplane_wing_clouds.png" alt="Airplane Wing Above Clouds" class="panel-img" />
+            </div>
+            <!-- Perspective 2: Golden Sunset Horizon with Cruising Jet -->
+            <div class="hero-panel hero-panel-sunset-horizon" id="heroPanelSunsetHorizon">
+                <img src="images/airplane_sunset_horizon.png" alt="Passenger Jet Flying Across Sunset Horizon" class="panel-img" />
+            </div>
+            <!-- Perspective 3: Sunset Wing Perspective -->
+            <div class="hero-panel hero-panel-wing-sunset" id="heroPanelWingSunset">
+                <img src="images/airplane_wing_sunset.png" alt="Airplane Wing View at Sunset" class="panel-img" />
+            </div>
+        </div>
+
+        <!-- 3D WebGL Canvas Overlay (Three.js Atmospheric Lighting & Volumetric Clouds) -->
+        <canvas id="hero3dCanvas" class="hero-3d-canvas"></canvas>
+        <div class="hero-3d-gradient-overlay"></div>
+
+        <!-- Dynamic 3D Floating Cloud Mist Overlay -->
+        <div class="hero-cloud-overlay" id="heroCloudOverlay">
+            <div class="cloud-mist mist-1"></div>
+            <div class="cloud-mist mist-2"></div>
+        </div>
+
+        <!-- Stereoscopic 3D Floating Content Typography & Controls -->
+        <div class="hero-content hero-3d-layer">
+            <div class="hero-badges-wrapper">
+                <div class="badge-gold" id="userGreetingText">
+                    <i class="fa-solid fa-plane-circle-check"></i> Welcome, Valued Passenger
+                </div>
+            </div>
+
+            <div class="floating-plane-wrapper floating-3d-element">
+                <i class="fa-solid fa-plane floating-plane"></i>
+                <div class="plane-glow-ring"></div>
+            </div>
+
+            <h1 class="hero-title floating-3d-element">Fly Beyond <span class="text-gold glowing-hero-title">Expectations</span></h1>
+            <p class="hero-subheading floating-3d-element">Discover extraordinary destinations around the globe with unmatched comfort, award-winning 7-star service, and exclusive fares.</p>
+
+            <div class="hero-buttons floating-3d-element">
+                <a href="#bookingSection" class="btn btn-primary hero-btn main-cta-btn">
+                    <i class="fa-solid fa-ticket-simple"></i> Book Flight Now <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                </a>
+                <a href="destinations.html" class="btn btn-secondary hero-btn">
+                    <i class="fa-solid fa-compass"></i> Explore Destinations
+                </a>
+                <button type="button" class="btn btn-secondary hero-btn ai-quick-trigger" onclick="document.getElementById('aiAgentTriggerBtn')?.click();">
+                    <i class="fa-solid fa-sparkles text-gold"></i> Ask Huzefa AI
+                </button>
+            </div>
+
+            <!-- Quick Flight Popular Route Chips -->
+            <div class="hero-quick-routes floating-3d-element">
+                <span class="quick-routes-label"><i class="fa-solid fa-bolt text-gold"></i> Quick Routes:</span>
+                <button type="button" class="route-chip" data-from="London (LHR)" data-to="Dubai (DXB)">🇬🇧 LHR → 🇦🇪 DXB</button>
+                <button type="button" class="route-chip" data-from="New York (JFK)" data-to="Tokyo (HND)">🇺🇸 JFK → 🇯🇵 HND</button>
+                <button type="button" class="route-chip" data-from="Paris (CDG)" data-to="Zurich (ZRH)">🇫🇷 CDG → 🇨🇭 ZRH</button>
+                <button type="button" class="route-chip" data-from="Singapore (SIN)" data-to="Bangkok (BKK)">🇸🇬 SIN → 🇹🇭 BKK</button>
+            </div>
+
+            <!-- Luxury Stat Highlights Strip -->
+            <div class="hero-stats-strip floating-3d-element">
+                <div class="hero-stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-earth-americas"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">180+</span>
+                        <span class="stat-label">Global Routes</span>
+                    </div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">7-Star</span>
+                        <span class="stat-label">Luxury Rated</span>
+                    </div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">On-Time Flight Record</span>
+                    </div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">2M+</span>
+                        <span class="stat-label">Happy Guests</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Admin Command Center Banner (Hidden by default, visible ONLY for huzefaairline@gmail.com) -->
+    <section id="indexAdminSection" style="display: none !important; padding: 2rem 0; background: linear-gradient(135deg, #040c1a, #0b4db8); color: #fff; border-bottom: 2px solid var(--gold);">
+        <div class="container">
+            <div class="glass-card" style="padding: 2rem; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--gold); border-radius: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+                <div style="max-width: 650px;">
+                    <span class="badge" style="background: var(--gold); color: var(--navy); font-weight: 800; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase;">
+                        <i class="fa-solid fa-shield-halved"></i> Executive Admin Control Center
+                    </span>
+                    <h2 style="font-size: 2rem; color: #fff; margin-top: 0.5rem;">Executive Command Center</h2>
+                    <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; margin-top: 0.3rem;">
+                        Logged in as <strong style="color: var(--gold);">huzefaairline@gmail.com</strong>. Manage flight operations, passenger accounts, and revenue stats in real-time.
+                    </p>
+                </div>
+                <div>
+                    <a href="admin.html" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1.05rem; font-weight: 800; background: var(--gold); color: var(--navy); border: none; box-shadow: 0 4px 20px rgba(245, 197, 66, 0.4); text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem; border-radius: 12px;">
+                        <i class="fa-solid fa-gauge-high"></i> Launch Admin Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flight Booking Widget -->
+    <section class="booking-section" id="bookingSection">
+        <div class="container">
+            <div class="glass-booking-card" id="searchWidgetCard" data-scroll-reveal="hero-search">
+                <div class="booking-tabs">
+                    <button class="trip-type-btn active" data-type="roundtrip"><i class="fa-solid fa-right-left"></i> Round Trip</button>
+                    <button class="trip-type-btn" data-type="oneway"><i class="fa-solid fa-arrow-right"></i> One Way</button>
+                </div>
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fromCity"><i class="fa-solid fa-plane-departure"></i> From</label>
+                            <select id="fromCity" required>
+                                <option value="London (LHR)">London Heathrow (LHR) 🇬🇧</option>
+                                <option value="Dubai (DXB)">Dubai International (DXB) 🇦🇪</option>
+                                <option value="New York (JFK)">New York JFK (JFK) 🇺🇸</option>
+                                <option value="Tokyo (HND)">Tokyo Haneda (HND) 🇯🇵</option>
+                                <option value="Paris (CDG)">Paris CDG (CDG) 🇫🇷</option>
+                                <option value="Rome (FCO)">Rome Fiumicino (FCO) 🇮🇹</option>
+                                <option value="Zurich (ZRH)">Zurich Airport (ZRH) 🇨🇭</option>
+                                <option value="Bangkok (BKK)">Bangkok Suvarnabhumi (BKK) 🇹🇭</option>
+                                <option value="Cairo (CAI)">Cairo International (CAI) 🇪🇬</option>
+                                <option value="Toronto (YYZ)">Toronto Pearson (YYZ) 🇨🇦</option>
+                                <option value="Istanbul (IST)">Istanbul Airport (IST) 🇹🇷</option>
+                                <option value="Mumbai (BOM)">Mumbai (BOM) 🇮🇳</option>
+                                <option value="Singapore (SIN)">Singapore Changi (SIN) 🇸🇬</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="toCity"><i class="fa-solid fa-plane-arrival"></i> To</label>
+                            <select id="toCity" required>
+                                <option value="Dubai (DXB)">Dubai International (DXB) 🇦🇪</option>
+                                <option value="London (LHR)">London Heathrow (LHR) 🇬🇧</option>
+                                <option value="Rome (FCO)">Rome Fiumicino (FCO) 🇮🇹</option>
+                                <option value="Zurich (ZRH)">Zurich Airport (ZRH) 🇨🇭</option>
+                                <option value="Tokyo (HND)">Tokyo Haneda (HND) 🇯🇵</option>
+                                <option value="Bangkok (BKK)">Bangkok Suvarnabhumi (BKK) 🇹🇭</option>
+                                <option value="Cairo (CAI)">Cairo International (CAI) 🇪🇬</option>
+                                <option value="Toronto (YYZ)">Toronto Pearson (YYZ) 🇨🇦</option>
+                                <option value="Istanbul (IST)">Istanbul Airport (IST) 🇹🇷</option>
+                                <option value="New York (JFK)">New York JFK (JFK) 🇺🇸</option>
+                                <option value="Paris (CDG)">Paris CDG (CDG) 🇫🇷</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="departDate"><i class="fa-solid fa-calendar-day"></i> Departure Date</label>
+                            <input type="date" id="departDate" required>
+                        </div>
+                        <div class="form-group" id="returnDateGroup">
+                            <label for="returnDate"><i class="fa-solid fa-calendar-check"></i> Return Date</label>
+                            <input type="date" id="returnDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="passengers"><i class="fa-solid fa-user-group"></i> Guests</label>
+                            <select id="passengers">
+                                <option value="1 Adult">1 Passenger</option>
+                                <option value="2 Adults">2 Passengers</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cabinClass"><i class="fa-solid fa-chair"></i> Class</label>
+                            <select id="cabinClass">
+                                <option value="First Class Suite">Huzefa First Suite</option>
+                                <option value="Business Class">Business Class</option>
+                                <option value="Economy">Economy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-action">
+                        <button type="submit" class="btn btn-search" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i> Search Available Flights</button>
+                    </div>
+                </form>
+                <div id="searchResults" class="search-results-area"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Routes -->
+    <section class="destinations-section section-padding">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-subtitle">FEATURED ROUTES</span>
+                <h2 class="section-title">Top Destinations This Week</h2>
+            </div>
+            <div class="destinations-grid" id="destinationsGrid">
+                <div class="destination-card reveal">
+                    <div class="dest-img-container">
+                        <img src="images/dest_dubai.png" alt="Dubai skyline at twilight">
+                        <span class="price-tag">From $499</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> UAE 🇦🇪</span>
+                        <h3>Dubai</h3>
+                        <p>Ultra-modern architecture, luxury shopping, and golden deserts.</p>
+                        <a href="destinations.html" class="btn btn-card-link">View All Destinations <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal">
+                    <div class="dest-img-container">
+                        <img src="images/dest_singapore.png" alt="Singapore Marina Bay Gardens">
+                        <span class="price-tag">From $650</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Singapore 🇸🇬</span>
+                        <h3>Singapore</h3>
+                        <p>Futuristic supertree gardens, multicultural heritage, and fine dining.</p>
+                        <a href="destinations.html" class="btn btn-card-link">View All Destinations <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal">
+                    <div class="dest-img-container">
+                        <img src="images/dest_tokyo.png" alt="Tokyo cityscape at dusk">
+                        <span class="price-tag">From $780</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Japan 🇯🇵</span>
+                        <h3>Tokyo</h3>
+                        <p>A dazzling blend of ancient traditions and futuristic neon metropolis.</p>
+                        <a href="destinations.html" class="btn btn-card-link">View All Destinations <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal">
+                    <div class="dest-img-container">
+                        <img src="images/dest_paris.png" alt="Paris Eiffel Tower">
+                        <span class="price-tag">From $580</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> France 🇫🇷</span>
+                        <h3>Paris</h3>
+                        <p>The city of lights, iconic Eiffel Tower views, and world-class fashion.</p>
+                        <a href="destinations.html" class="btn btn-card-link">View All Destinations <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal">
+                    <div class="dest-img-container">
+                        <img src="images/dest_maldives.png" alt="Maldives Overwater Bungalows">
+                        <span class="price-tag">From $890</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Maldives 🇲🇻</span>
+                        <h3>Maldives</h3>
+                        <p>Crystal turquoise waters, private overwater villas, and ocean sunsets.</p>
+                        <a href="destinations.html" class="btn btn-card-link">View All Destinations <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal">
+                    <div class="dest-img-container">
+                        <img src="images/dest_rome.png" alt="Rome Colosseum">
+                        <span class="price-tag">From $540</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Italy 🇮🇹</span>
+                        <h3>Rome</h3>
+                        <p>Historic Colosseum, timeless Renaissance charm, and Italian gastronomy.</p>
+                        <a href="destinations.html" class="btn btn-card-link">View All Destinations <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive SVG Flight Path & How It Works Section -->
+    <section class="flight-path-section section-padding" id="how-it-works">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-subtitle">SEAMLESS JOURNEY</span>
+                <h2 class="section-title">How Your Journey Unfolds</h2>
+                <p class="section-desc">Watch our real-time SVG aircraft navigate the route as you scroll through your premium flight experience.</p>
+            </div>
+
+            <div class="flight-path-wrapper reveal">
+                <div class="flight-path-container">
+                    <!-- SVG Curved Flight Path -->
+                    <svg class="flight-path-svg" viewBox="0 0 1000 240" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <linearGradient id="flightLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="var(--royal-blue)" stop-opacity="0.4"/>
+                                <stop offset="50%" stop-color="var(--gold)" stop-opacity="1"/>
+                                <stop offset="100%" stop-color="#00f2fe" stop-opacity="1"/>
+                            </linearGradient>
+                            <filter id="planeGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="5" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+
+                        <!-- Background Base Path (subtle dashed gray) -->
+                        <path class="flight-path-base" d="M 50,120 Q 250,20 500,120 T 950,120" />
+                        
+                        <!-- Animated Gradient Active Dashed Path -->
+                        <path class="flight-path-active" id="flightPathCurve" d="M 50,120 Q 250,20 500,120 T 950,120" />
+                        
+                        <!-- Waypoint Marker Circles -->
+                        <g class="path-waypoints">
+                            <circle cx="50" cy="120" r="10" class="waypoint-node node-1 active" />
+                            <circle cx="325" cy="70" r="10" class="waypoint-node node-2" />
+                            <circle cx="675" cy="170" r="10" class="waypoint-node node-3" />
+                            <circle cx="950" cy="120" r="10" class="waypoint-node node-4" />
+                        </g>
+                    </svg>
+
+                    <!-- Moving Aircraft Marker Element (Rotates & Translates along path) -->
+                    <div class="plane-marker" id="planeMarker">
+                        <div class="plane-icon-glow"><i class="fa-solid fa-plane"></i></div>
+                        <div class="plane-pulse-ring"></div>
+                    </div>
+                </div>
+
+                <!-- 4 Interactive Step Cards Positioned Under Waypoints -->
+                <div class="journey-steps-grid">
+                    <div class="step-card reveal" data-step="1">
+                        <div class="step-badge">Step 01</div>
+                        <div class="step-icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                        <h3>Search & Reserve</h3>
+                        <p>Explore real-time 7-star routes, First Class suites, and direct flight options.</p>
+                    </div>
+
+                    <div class="step-card reveal" data-step="2">
+                        <div class="step-badge">Step 02</div>
+                        <div class="step-icon"><i class="fa-solid fa-passport"></i></div>
+                        <h3>VIP Lounge Access</h3>
+                        <p>Bypass lines with express luxury airport lounge check-in & priority boarding.</p>
+                    </div>
+
+                    <div class="step-card reveal" data-step="3">
+                        <div class="step-badge">Step 03</div>
+                        <div class="step-icon"><i class="fa-solid fa-cloud-moon"></i></div>
+                        <h3>In-Flight Sanctuary</h3>
+                        <p>Unwind in private lie-flat suites with gourmet dining & 4K entertainment.</p>
+                    </div>
+
+                    <div class="step-card reveal" data-step="4">
+                        <div class="step-badge">Step 04</div>
+                        <div class="step-icon"><i class="fa-solid fa-plane-arrival"></i></div>
+                        <h3>Chauffeur Arrival</h3>
+                        <p>Seamless luxury transfer waiting at your destination terminal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Cabin Experience Showcase -->
+    <section class="experience-section section-padding">
+        <div class="container">
+            <div class="experience-card glass-card reveal">
+                <div class="experience-img-container">
+                    <img src="images/cabin_suite.png" alt="Huzefa First Class Private Suite">
+                    <div class="experience-badge"><i class="fa-solid fa-crown text-gold"></i> 7-Star First Suite</div>
+                </div>
+                <div class="experience-content">
+                    <span class="section-subtitle">UNMATCHED LUXURY</span>
+                    <h2 class="section-title">The First Class Private Suite</h2>
+                    <p class="experience-desc">Experience complete privacy behind sliding doors, full lie-flat leather seating, personalized ambient lighting, and bespoke dining crafted by Michelin-starred chefs.</p>
+                    <ul class="experience-features">
+                        <li><i class="fa-solid fa-check text-gold"></i> Fully Enclosed Private Sanctuary</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> On-Demand Fine Dining & Vintage Cellar</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> Zero-Gravity Lie-Flat Bed with Luxury Linens</li>
+                    </ul>
+                    <a href="flights.html" class="btn btn-primary">Experience First Suite <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us-section section-padding">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-subtitle">WORLD-CLASS HOSPITALITY</span>
+                <h2 class="section-title">The Huzefa Difference</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <h3>Best Price Guarantee</h3>
+                    <p>Transparent pricing with zero hidden surcharges on all flights.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h3>24/7 Concierge</h3>
+                    <p>Personalized round-the-clock reservation and guest support.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-heart"></i></div>
+                    <h3>7-Star Safety</h3>
+                    <p>Top safety ratings and state-of-the-art aircraft maintenance.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-earth-americas"></i></div>
+                    <h3>Global Reach</h3>
+                    <p>Connecting over 120 destinations across 6 continents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Stats Counter Showcase -->
+    <section class="stats-section section-padding" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card glass-card reveal">
+                    <div class="stat-icon"><i class="fa-solid fa-users text-gold"></i></div>
+                    <div class="stat-number-wrap">
+                        <span class="stat-number" data-counter="1000000" data-suffix="M+" data-format="million">0</span>
+                    </div>
+                    <div class="stat-label">Passengers Flown Annually</div>
+                    <div class="stat-sublabel">Worldwide luxury travelers</div>
+                </div>
+
+                <div class="stat-card glass-card reveal">
+                    <div class="stat-icon"><i class="fa-solid fa-earth-americas text-gold"></i></div>
+                    <div class="stat-number-wrap">
+                        <span class="stat-number" data-counter="500" data-suffix="+">0</span>
+                    </div>
+                    <div class="stat-label">Global Destinations</div>
+                    <div class="stat-sublabel">Across 6 continents with direct routes</div>
+                </div>
+
+                <div class="stat-card glass-card reveal">
+                    <div class="stat-icon"><i class="fa-solid fa-plane-circle-check text-gold"></i></div>
+                    <div class="stat-number-wrap">
+                        <span class="stat-number" data-counter="99.8" data-decimals="1" data-suffix="%">0</span>
+                    </div>
+                    <div class="stat-label">On-Time Flight Precision</div>
+                    <div class="stat-sublabel">Industry-leading departure record</div>
+                </div>
+
+                <div class="stat-card glass-card reveal">
+                    <div class="stat-icon"><i class="fa-solid fa-star text-gold"></i></div>
+                    <div class="stat-number-wrap">
+                        <span class="stat-number" data-counter="7" data-suffix="-Star">0</span>
+                    </div>
+                    <div class="stat-label">Hospitality Rating</div>
+                    <div class="stat-sublabel">Voted Best Luxury Airline 2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comprehensive Aviation Footer -->
+    <footer class="footer" style="background: #040c1a; border-top: 1px solid rgba(245,197,66,0.2); padding-top: 3rem; color: #fff;">
+        <div class="container">
+            <div class="grid grid-4" style="gap: 2rem; margin-bottom: 2.5rem; font-size: 0.9rem;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                        <img src="images/logo_gold.png" alt="Huzefa Airlines" style="height: 38px;" />
+                        <span style="font-weight: 800; font-size: 1.2rem; color: var(--gold); letter-spacing: 1px;">HUZEFA AIRLINES</span>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">7-Star award-winning luxury aviation connecting 120+ destinations with world-class hospitality.</p>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.05rem;">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <li><a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home Page</a></li>
+                        <li><a href="flights.html" style="color: rgba(255,255,255,0.8); text-decoration: none;">Book Flights</a></li>
+                        <li><a href="destinations.html" style="color: rgba(255,255,255,0.8); text-decoration: none;">Destinations</a></li>
+                        <li><a href="status.html" style="color: rgba(255,255,255,0.8); text-decoration: none;">Flight Status</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.05rem;">Member Portal</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <li><a href="dashboard.html" style="color: rgba(255,255,255,0.8); text-decoration: none;"><i class="fa-solid fa-gauge text-gold"></i> Passenger Dashboard</a></li>
+                        <li><a href="admin.html" class="admin-nav-link" style="display: none !important; color: var(--gold); font-weight: 700; text-decoration: none;"><i class="fa-solid fa-user-shield"></i> Admin Portal</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.05rem;">24/7 Concierge</h4>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 0.5rem;"><i class="fa-solid fa-phone text-gold"></i> +1 (800) 555-HUZEFA</p>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 0.5rem;"><i class="fa-solid fa-envelope text-gold"></i> concierge@huzefaairlines.com</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">London • Dubai • New York • Tokyo</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.85rem;">
+                <p>&copy; 2026 Huzefa Airlines. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="flights.html" class="bottom-nav-item">
+            <i class="fa-solid fa-plane"></i>
+            <span>Flights</span>
+        </a>
+        <a href="destinations.html" class="bottom-nav-item">
+            <i class="fa-solid fa-earth-americas"></i>
+            <span>Explore</span>
+        </a>
+        <a href="dashboard.html" class="bottom-nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script src="public/auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof protectPage === 'function') {
+                protectPage();
+            }
+        });
+    </script>
+</body>
+</html>

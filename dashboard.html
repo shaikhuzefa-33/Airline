@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passenger Dashboard - Huzefa Airlines</title>
+    <meta name="description" content="View your flight bookings, boarding passes, and Huzefa Club loyalty benefits." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header sticky" id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Emblem" class="logo-img" />
+                <div class="logo-text">
+                    <span class="brand-name">HUZEFA</span>
+                    <span class="brand-sub">AIRLINES</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="flights.html" class="nav-link">Book Flights</a>
+                <a href="status.html" class="nav-link">Flight Status</a>
+                <a href="dashboard.html" class="nav-link active">My Dashboard</a>
+                <a href="admin.html" class="nav-link admin-nav-link" id="navAdminPortalLink" style="display: none; color: var(--gold); font-weight:700;"><i class="fa-solid fa-user-shield"></i> Admin Portal</a>
+            </nav>
+
+            <div class="nav-auth-buttons" id="navAuthContainers">
+                <!-- Dynamically filled by script.js -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Section -->
+    <section class="section" style="padding-top: 7rem; background: var(--light-bg); min-height: 85vh;">
+        <div class="container">
+            
+            <!-- Dashboard Welcome Banner -->
+            <div class="glass-card" style="padding: 2rem; background: linear-gradient(135deg, var(--navy), var(--royal-blue)); color: var(--white); border-radius: 16px; margin-bottom: 2rem; position: relative; overflow: hidden;">
+                <div style="position: absolute; right: -30px; bottom: -30px; opacity: 0.15; font-size: 14rem;">
+                    <i class="fa-solid fa-plane-departure"></i>
+                </div>
+                <div style="position: relative; z-index: 2;">
+                    <span class="badge" style="background: var(--gold); color: var(--navy); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;">Huzefa Club Silver Member</span>
+                    <h2 style="font-size: 2.2rem; margin-top: 0.5rem; color: var(--white);" id="dashWelcomeTitle">Welcome Back, Traveler!</h2>
+                    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin-top: 0.4rem;">Manage your active flight bookings, download electronic boarding passes, and redeem your Huzefa Club reward miles.</p>
+                </div>
+            </div>
+
+            <!-- Stats Overview Cards -->
+            <div class="grid grid-3" style="margin-bottom: 2rem; gap: 1.5rem;">
+                <div class="glass-card" style="padding: 1.5rem; background: var(--white); border-radius: 14px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 1.2rem;">
+                    <div style="width: 55px; height: 55px; border-radius: 12px; background: rgba(11, 77, 184, 0.1); color: var(--royal-blue); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 0.9rem; color: var(--gray-text); font-weight: 500;">Active Bookings</h4>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--navy);">2 Flights</div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="padding: 1.5rem; background: var(--white); border-radius: 14px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 1.2rem;">
+                    <div style="width: 55px; height: 55px; border-radius: 12px; background: rgba(245, 197, 66, 0.15); color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+                        <i class="fa-solid fa-crown text-gold"></i>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 0.9rem; color: var(--gray-text); font-weight: 500;">Huzefa Club Miles</h4>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--navy);">14,850 Pts</div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="padding: 1.5rem; background: var(--white); border-radius: 14px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 1.2rem;">
+                    <div style="width: 55px; height: 55px; border-radius: 12px; background: rgba(34, 197, 94, 0.1); color: #22c55e; display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+                        <i class="fa-solid fa-plane-circle-check"></i>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 0.9rem; color: var(--gray-text); font-weight: 500;">Completed Trips</h4>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--navy);">6 Journeys</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Itineraries Table -->
+            <div class="glass-card" style="padding: 2rem; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.3rem; color: var(--navy);"><i class="fa-solid fa-suitcase-rolling text-gold"></i> Your Upcoming Itineraries</h3>
+                    <a href="flights.html" class="btn btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.88rem;">+ Book New Flight</a>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-color); color: var(--navy);">
+                                <th style="padding: 0.8rem;">Booking Ref (PNR)</th>
+                                <th style="padding: 0.8rem;">Flight</th>
+                                <th style="padding: 0.8rem;">Route</th>
+                                <th style="padding: 0.8rem;">Date & Time</th>
+                                <th style="padding: 0.8rem;">Cabin Class</th>
+                                <th style="padding: 0.8rem;">Status</th>
+                                <th style="padding: 0.8rem; text-align: right;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 1rem; font-weight: 700; color: var(--royal-blue);">HZ-984210</td>
+                                <td style="padding: 1rem; font-weight: 600;">HZ-101</td>
+                                <td style="padding: 1rem;">LHR ➔ DXB</td>
+                                <td style="padding: 1rem;">Tomorrow, 06:15 AM</td>
+                                <td style="padding: 1rem;"><span class="badge" style="background: rgba(245,197,66,0.2); color: var(--navy); font-weight: 700;">Business Suite</span></td>
+                                <td style="padding: 1rem;"><span style="color: #22c55e; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> On Time</span></td>
+                                <td style="padding: 1rem; text-align: right;">
+                                    <button type="button" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;">Boarding Pass</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 1rem; font-weight: 700; color: var(--royal-blue);">HZ-741092</td>
+                                <td style="padding: 1rem; font-weight: 600;">HZ-340</td>
+                                <td style="padding: 1rem;">JFK ➔ HND</td>
+                                <td style="padding: 1rem;">Aug 24, 02:20 PM</td>
+                                <td style="padding: 1rem;"><span class="badge" style="background: rgba(11,77,184,0.1); color: var(--royal-blue);">Economy Standard</span></td>
+                                <td style="padding: 1rem;"><span style="color: #22c55e; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Confirmed</span></td>
+                                <td style="padding: 1rem; text-align: right;">
+                                    <button type="button" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;">Manage Seat</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Huzefa Airlines. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

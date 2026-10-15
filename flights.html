@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huzefa Airlines | Flight Booking Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="backToTop" class="back-to-top" title="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <!-- Sticky Navigation Bar Module -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Logo" class="logo-img" />
+                <span class="logo-text">Huzefa <span>Airlines</span></span>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="flights.html" class="nav-link active">Flights</a>
+                <a href="destinations.html" class="nav-link">Destinations</a>
+                <a href="offers.html" class="nav-link">Offers</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="status.html" class="nav-link"><i class="fa-solid fa-satellite-dish text-gold"></i> Status</a>
+                <a href="admin.html" class="nav-link admin-nav-link" style="display: none !important; color: var(--gold); font-weight:700;"><i class="fa-solid fa-user-shield text-gold"></i> Admin Portal</a>
+                <div class="mobile-auth-btns"></div>
+            </nav>
+            <div class="nav-auth"></div>
+            <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Flight Search Booking Module -->
+    <section class="booking-section section-padding" style="padding-top: 140px;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">FLIGHT RESERVATIONS</span>
+                <h2 class="section-title">Search & Reserve Flights</h2>
+                <p class="section-desc">Search real-time international schedules, view seats, and confirm your reservation.</p>
+            </div>
+
+            <div class="glass-booking-card">
+                <div class="booking-tabs">
+                    <button class="trip-type-btn active" data-type="roundtrip"><i class="fa-solid fa-right-left"></i> Round Trip</button>
+                    <button class="trip-type-btn" data-type="oneway"><i class="fa-solid fa-arrow-right"></i> One Way</button>
+                </div>
+
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fromCity"><i class="fa-solid fa-plane-departure"></i> From</label>
+                            <select id="fromCity" required>
+                                <option value="London (LHR)">London Heathrow (LHR) 🇬🇧</option>
+                                <option value="Dubai (DXB)">Dubai International (DXB) 🇦🇪</option>
+                                <option value="New York (JFK)">New York JFK (JFK) 🇺🇸</option>
+                                <option value="Tokyo (HND)">Tokyo Haneda (HND) 🇯🇵</option>
+                                <option value="Paris (CDG)">Paris CDG (CDG) 🇫🇷</option>
+                                <option value="Rome (FCO)">Rome Fiumicino (FCO) 🇮🇹</option>
+                                <option value="Zurich (ZRH)">Zurich Airport (ZRH) 🇨🇭</option>
+                                <option value="Bangkok (BKK)">Bangkok Suvarnabhumi (BKK) 🇹🇭</option>
+                                <option value="Cairo (CAI)">Cairo International (CAI) 🇪🇬</option>
+                                <option value="Toronto (YYZ)">Toronto Pearson (YYZ) 🇨🇦</option>
+                                <option value="Istanbul (IST)">Istanbul Airport (IST) 🇹🇷</option>
+                                <option value="Mumbai (BOM)">Mumbai (BOM) 🇮🇳</option>
+                                <option value="Singapore (SIN)">Singapore Changi (SIN) 🇸🇬</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="toCity"><i class="fa-solid fa-plane-arrival"></i> To</label>
+                            <select id="toCity" required>
+                                <option value="Dubai (DXB)">Dubai International (DXB) 🇦🇪</option>
+                                <option value="London (LHR)">London Heathrow (LHR) 🇬🇧</option>
+                                <option value="Rome (FCO)">Rome Fiumicino (FCO) 🇮🇹</option>
+                                <option value="Zurich (ZRH)">Zurich Airport (ZRH) 🇨🇭</option>
+                                <option value="Tokyo (HND)">Tokyo Haneda (HND) 🇯🇵</option>
+                                <option value="Bangkok (BKK)">Bangkok Suvarnabhumi (BKK) 🇹🇭</option>
+                                <option value="Cairo (CAI)">Cairo International (CAI) 🇪🇬</option>
+                                <option value="Toronto (YYZ)">Toronto Pearson (YYZ) 🇨🇦</option>
+                                <option value="Istanbul (IST)">Istanbul Airport (IST) 🇹🇷</option>
+                                <option value="New York (JFK)">New York JFK (JFK) 🇺🇸</option>
+                                <option value="Paris (CDG)">Paris CDG (CDG) 🇫🇷</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="departDate"><i class="fa-solid fa-calendar-day"></i> Departure Date</label>
+                            <input type="date" id="departDate" required>
+                        </div>
+                        <div class="form-group" id="returnDateGroup">
+                            <label for="returnDate"><i class="fa-solid fa-calendar-check"></i> Return Date</label>
+                            <input type="date" id="returnDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="passengers"><i class="fa-solid fa-user-group"></i> Passengers</label>
+                            <select id="passengers">
+                                <option value="1 Adult">1 Passenger</option>
+                                <option value="2 Adults">2 Passengers</option>
+                                <option value="3 Adults">3 Passengers</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cabinClass"><i class="fa-solid fa-chair"></i> Cabin Class</label>
+                            <select id="cabinClass">
+                                <option value="First Class Suite">Huzefa First Suite</option>
+                                <option value="Business Class">Business Class</option>
+                                <option value="Economy">Economy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-action">
+                        <button type="submit" class="btn btn-search" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i> Search Available Flights</button>
+                    </div>
+                </form>
+
+                <div id="searchResults" class="search-results-area"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Module -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Huzefa Airlines. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

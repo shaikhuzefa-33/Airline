@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huzefa Airlines | Destinations Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="backToTop" class="back-to-top" title="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Logo" class="logo-img" />
+                <span class="logo-text">Huzefa <span>Airlines</span></span>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="flights.html" class="nav-link">Flights</a>
+                <a href="destinations.html" class="nav-link active">Destinations</a>
+                <a href="offers.html" class="nav-link">Offers</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="status.html" class="nav-link"><i class="fa-solid fa-satellite-dish text-gold"></i> Status</a>
+                <a href="admin.html" class="nav-link admin-nav-link" style="display: none !important; color: var(--gold); font-weight:700;"><i class="fa-solid fa-user-shield text-gold"></i> Admin Portal</a>
+                <div class="mobile-auth-btns"></div>
+            </nav>
+            <div class="nav-auth"></div>
+            <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <section class="destinations-section section-padding" style="padding-top: 140px;" id="destinations">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">GLOBAL NETWORK MODULE</span>
+                <h2 class="section-title">Popular Destinations</h2>
+                <p class="section-desc">Handpicked international flights to iconic global cities.</p>
+            </div>
+
+            <div class="destinations-grid">
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_dubai.png" alt="Dubai">
+                        <span class="price-tag">From $499</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> UAE</span>
+                        <h3>Dubai</h3>
+                        <p>Ultra-modern architecture, luxury shopping, and golden deserts.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_singapore.png" alt="Singapore">
+                        <span class="price-tag">From $650</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Singapore</span>
+                        <h3>Singapore</h3>
+                        <p>Garden city of supertrees, vibrant culture, and fine dining.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_tokyo.png" alt="Tokyo">
+                        <span class="price-tag">From $780</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Japan</span>
+                        <h3>Tokyo</h3>
+                        <p>Futuristic neon skylines, historic temples, and gourmet dining.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_london.png" alt="London">
+                        <span class="price-tag">From $520</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> UK</span>
+                        <h3>London</h3>
+                        <p>Historic landmarks, royal parks, and world-class theatre.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_paris.png" alt="Paris">
+                        <span class="price-tag">From $580</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> France</span>
+                        <h3>Paris</h3>
+                        <p>The city of light, romantic boulevards, and fine art.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_newyork.png" alt="New York">
+                        <span class="price-tag">From $610</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> USA</span>
+                        <h3>New York</h3>
+                        <p>Endless Broadway shows, Central Park, and iconic skyscrapers.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_rome.png" alt="Rome Colosseum">
+                        <span class="price-tag">From $540</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Italy 🇮🇹</span>
+                        <h3>Rome</h3>
+                        <p>Ancient Colosseum, timeless Renaissance art, and gourmet cuisine.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_zurich.png" alt="Zurich Alpine Lakes">
+                        <span class="price-tag">From $620</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Switzerland 🇨🇭</span>
+                        <h3>Zurich</h3>
+                        <p>Snow-capped Alpine panoramas, crystal lakes, and Swiss luxury.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_bangkok.png" alt="Bangkok Temples">
+                        <span class="price-tag">From $450</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Thailand 🇹🇭</span>
+                        <h3>Bangkok</h3>
+                        <p>Golden grand temples, floating street markets, and tropical islands.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_cairo.png" alt="Cairo Pyramids">
+                        <span class="price-tag">From $480</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Egypt 🇪🇬</span>
+                        <h3>Cairo</h3>
+                        <p>The Great Pyramids of Giza, historic Nile cruises, and pharaonic treasures.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_toronto.png" alt="Toronto Skyline">
+                        <span class="price-tag">From $590</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Canada 🇨🇦</span>
+                        <h3>Toronto</h3>
+                        <p>Multicultural waterfront skyline, CN Tower, and Niagara Falls.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_istanbul.png" alt="Istanbul Bosphorus">
+                        <span class="price-tag">From $470</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Turkey 🇹🇷</span>
+                        <h3>Istanbul</h3>
+                        <p>Where East meets West, majestic Bosphorus views, and Grand Bazaars.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_maldives.png" alt="Maldives Overwater Bungalows">
+                        <span class="price-tag">From $890</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Maldives 🇲🇻</span>
+                        <h3>Maldives</h3>
+                        <p>Crystal turquoise lagoons, luxurious overwater villas, and coral reefs.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_sydney.png" alt="Sydney Opera House">
+                        <span class="price-tag">From $790</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> Australia 🇦🇺</span>
+                        <h3>Sydney</h3>
+                        <p>Iconic Opera House, golden harbor bridges, and pristine ocean beaches.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="destination-card reveal active">
+                    <div class="dest-img-container">
+                        <img src="images/dest_mumbai.png" alt="Gateway of India Mumbai">
+                        <span class="price-tag">From $430</span>
+                    </div>
+                    <div class="dest-content">
+                        <span class="country"><i class="fa-solid fa-location-dot"></i> India 🇮🇳</span>
+                        <h3>Mumbai</h3>
+                        <p>The city of dreams, colonial architecture, vibrant street food, and Bollywood.</p>
+                        <a href="flights.html" class="btn btn-card-link">Book Flight <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Huzefa Airlines. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

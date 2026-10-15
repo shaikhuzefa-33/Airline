@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huzefa Airlines | Offers Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="backToTop" class="back-to-top" title="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Logo" class="logo-img" />
+                <span class="logo-text">Huzefa <span>Airlines</span></span>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="flights.html" class="nav-link">Flights</a>
+                <a href="destinations.html" class="nav-link">Destinations</a>
+                <a href="offers.html" class="nav-link active">Offers</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="status.html" class="nav-link"><i class="fa-solid fa-satellite-dish text-gold"></i> Status</a>
+                <a href="admin.html" class="nav-link admin-nav-link" style="display: none !important; color: var(--gold); font-weight:700;"><i class="fa-solid fa-user-shield text-gold"></i> Admin Portal</a>
+                <div class="mobile-auth-btns"></div>
+            </nav>
+            <div class="nav-auth"></div>
+            <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <section class="offers-section section-padding" style="padding-top: 140px;" id="offers">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">PROMOTIONS MODULE</span>
+                <h2 class="section-title">Special Offers & Discounts</h2>
+                <p class="section-desc">Exclusive flight promo deals and companion fares.</p>
+            </div>
+
+            <div class="offers-grid">
+                <div class="offer-card reveal active">
+                    <div class="offer-img-wrap">
+                        <img src="images/dest_paris.png" alt="European Summer Getaway">
+                        <div class="offer-badge badge-20">20% OFF</div>
+                    </div>
+                    <div class="offer-body">
+                        <i class="fa-solid fa-sun offer-icon"></i>
+                        <h3>Early Bird Summer Escape</h3>
+                        <p>Book 60 days in advance and save 20% on all First Class and Business flights to Europe.</p>
+                        <div class="offer-code">Code: <span>SUMMER20</span></div>
+                        <a href="flights.html" class="btn btn-offer">Claim Offer</a>
+                    </div>
+                </div>
+
+                <div class="offer-card reveal active">
+                    <div class="offer-img-wrap">
+                        <img src="images/dest_dubai.png" alt="Middle East Weekend Special">
+                        <div class="offer-badge badge-30">30% OFF</div>
+                    </div>
+                    <div class="offer-body">
+                        <i class="fa-solid fa-gem offer-icon"></i>
+                        <h3>Weekend Getaway Special</h3>
+                        <p>Fly to select Middle Eastern destinations this month and enjoy 30% off companion tickets.</p>
+                        <div class="offer-code">Code: <span>WEEKEND30</span></div>
+                        <a href="flights.html" class="btn btn-offer">Claim Offer</a>
+                    </div>
+                </div>
+
+                <div class="offer-card reveal active">
+                    <div class="offer-img-wrap">
+                        <img src="images/dest_tokyo.png" alt="Asia Global Club Deal">
+                        <div class="offer-badge badge-40">40% OFF</div>
+                    </div>
+                    <div class="offer-body">
+                        <i class="fa-solid fa-passport offer-icon"></i>
+                        <h3>Global Club Member Deal</h3>
+                        <p>Exclusive 40% discount on long-haul Asian routes for Huzefa Club frequent flyers.</p>
+                        <div class="offer-code">Code: <span>HUZEFA40</span></div>
+                        <a href="flights.html" class="btn btn-offer">Claim Offer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Huzefa Airlines. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

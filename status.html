@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huzefa Airlines | Flight Status Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="backToTop" class="back-to-top" title="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Logo" class="logo-img" />
+                <span class="logo-text">Huzefa <span>Airlines</span></span>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="flights.html" class="nav-link">Flights</a>
+                <a href="destinations.html" class="nav-link">Destinations</a>
+                <a href="offers.html" class="nav-link">Offers</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="status.html" class="nav-link active"><i class="fa-solid fa-satellite-dish text-gold"></i> Status</a>
+                <a href="admin.html" class="nav-link admin-nav-link" style="display: none !important; color: var(--gold); font-weight:700;"><i class="fa-solid fa-user-shield text-gold"></i> Admin Portal</a>
+                <div class="mobile-auth-btns"></div>
+            </nav>
+            <div class="nav-auth"></div>
+            <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <section class="section-padding" style="padding-top: 140px;" id="status">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">LIVE TRACKER MODULE</span>
+                <h2 class="section-title">Live Flight Tracker</h2>
+                <p class="section-desc">Track real-time flight position, status, and departure/arrival times.</p>
+            </div>
+
+            <div class="glass-booking-card" style="max-width: 800px; margin: 0 auto;">
+                <form class="booking-form" onsubmit="event.preventDefault(); document.getElementById('demoStatus').style.display='block';">
+                    <div class="form-grid" style="grid-template-columns: 2fr 1fr;">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-plane"></i> Flight Number</label>
+                            <input type="text" value="HZ-101" required>
+                        </div>
+                        <div class="form-group" style="justify-content:flex-end;">
+                            <button type="submit" class="btn btn-primary" style="height:50px;"><i class="fa-solid fa-search"></i> Track Status</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="demoStatus" style="margin-top:2rem; background:#eef4ff; border:1px solid #c7dafc; border-radius:12px; padding:1.5rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3 style="color:var(--navy);">Flight HZ-101 (London ➔ Dubai)</h3>
+                        <span style="background:#10b981; color:#fff; padding:0.3rem 0.8rem; border-radius:20px; font-weight:700; font-size:0.8rem;">ON TIME / IN FLIGHT</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-top:1rem; font-size:0.9rem; color:var(--dark-text);">
+                        <div><strong>Aircraft:</strong> Airbus A350-1000</div>
+                        <div><strong>Altitude:</strong> 38,000 ft</div>
+                        <div><strong>Airspeed:</strong> 550 knots</div>
+                        <div><strong>Departure:</strong> 06:18 UTC</div>
+                        <div><strong>Est. Arrival:</strong> 14:28 GST</div>
+                        <div><strong>Gate:</strong> Gate B24</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Huzefa Airlines. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

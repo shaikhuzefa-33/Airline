@@ -1,0 +1,38 @@
+{
+  "name": "huzefa-airlines-cross-platform",
+  "version": "1.0.0",
+  "description": "Cross-Platform PWA & Android Airline Application for Huzefa Airlines",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "cap:init": "npx cap init \"Huzefa Airlines\" com.huzefa.airlines --web-dir .",
+    "cap:add": "npx cap add android",
+    "cap:sync": "npx cap sync",
+    "cap:open": "npx cap open android"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "jwt",
+    "bcryptjs",
+    "pwa",
+    "capacitor",
+    "android",
+    "huzefa-airlines"
+  ],
+  "author": "Huzefa Airlines Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@vercel/speed-insights": "^1.0.12",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.7"
+  }
+}

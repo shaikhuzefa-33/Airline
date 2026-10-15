@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Huzefa Airlines — Fly Beyond Expectations</title>
+    <meta name="description" content="Experience award-winning 7-star luxury aviation. Log in or create an account to begin your journey with Huzefa Airlines." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        /* ===== TOKENS ===== */
+        :root {
+            --navy-deep:  #040c1a;
+            --navy:       #071a3d;
+            --gold:       #f5c542;
+            --gold-dim:   rgba(245,197,66,.14);
+            --gold-glow:  rgba(245,197,66,.45);
+            --dim:        rgba(255,255,255,.6);
+            --muted:      rgba(255,255,255,.35);
+            --glass:      rgba(255,255,255,.07);
+            --border:     rgba(255,255,255,.14);
+            --ease:       all .35s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html, body { height:100%; overflow:hidden; font-family:'Outfit',-apple-system,sans-serif; }
+
+        /* ===== FULL-SCREEN BACKGROUND ===== */
+        .bg {
+            position: fixed; inset: 0; z-index: 0;
+        }
+
+        .bg img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center 30%;
+            animation: bgZoom 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgZoom {
+            from { transform: scale(1.0);   filter: brightness(.55); }
+            to   { transform: scale(1.08);  filter: brightness(.48); }
+        }
+
+        /* Multi-layer gradient on top of photo */
+        .bg::after {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 100%, rgba(4,12,26,.95) 0%, transparent 70%),
+                radial-gradient(ellipse 100% 50% at 50% 0%,   rgba(4,12,26,.7)  0%, transparent 70%),
+                linear-gradient(to bottom, rgba(4,12,26,.4) 0%, transparent 40%, rgba(4,12,26,.8) 100%);
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .particles {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+        }
+        .particles span {
+            position: absolute; border-radius: 50%;
+            background: rgba(245,197,66,.07);
+            animation: particleRise linear infinite;
+        }
+        @keyframes particleRise {
+            from { transform: translateY(105vh) scale(0); opacity: 0; }
+            8%   { opacity: 1; }
+            92%  { opacity: .4; }
+            to   { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* ===== NAV BAR ===== */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.4rem 3rem;
+            background: linear-gradient(to bottom, rgba(4,12,26,.8), transparent);
+            animation: navIn .8s ease both;
+        }
+        @keyframes navIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-logo { display: flex; align-items: center; gap: .9rem; text-decoration: none; }
+        .nav-logo img {
+            width: 42px; height: 42px; object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(245,197,66,.65));
+        }
+        .logo-name { font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: 3px; line-height: 1; }
+        .logo-sub  { font-size: .58rem; font-weight: 600; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; margin-top: 2px; }
+
+        .nav-links {
+            display: flex; align-items: center; gap: 2rem;
+        }
+        .nav-links a {
+            font-size: .83rem; font-weight: 500; color: var(--dim);
+            text-decoration: none; letter-spacing: .4px;
+            transition: color .25s;
+        }
+        .nav-links a:hover { color: #fff; }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative; z-index: 2;
+            height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+
+        /* Animated route line decoration */
+        .route-line {
+            display: flex; align-items: center; gap: .6rem;
+            margin-bottom: 1.6rem;
+            animation: fadeUp .7s .1s cubic-bezier(.16,1,.3,1) both;
+        }
+        .route-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            border: 2px solid var(--gold); background: transparent;
+        }
+        .route-dash {
+            flex: 1; max-width: 60px; height: 1px;
+            background: linear-gradient(to right, var(--gold), rgba(245,197,66,.2));
+        }
+        .route-plane { color: var(--gold); font-size: .9rem; }
+        .route-dash.right {
+            background: linear-gradient(to left, var(--gold), rgba(245,197,66,.2));
+        }
+        .route-label {
+            font-size: .68rem; font-weight: 700; color: var(--gold);
+            letter-spacing: 2.5px; text-transform: uppercase;
+        }
+
+        /* Badge */
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: var(--gold-dim); border: 1px solid rgba(245,197,66,.28);
+            border-radius: 50px; padding: .36rem 1.1rem;
+            font-size: .7rem; font-weight: 700; color: var(--gold);
+            letter-spacing: 1.5px; text-transform: uppercase;
+            margin-bottom: 1.5rem; backdrop-filter: blur(12px);
+            animation: fadeUp .7s .2s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        /* Main headline */
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 700; color: #fff; line-height: 1.1;
+            text-shadow: 0 4px 40px rgba(0,0,0,.5);
+            margin-bottom: .7rem;
+            animation: fadeUp .7s .3s cubic-bezier(.16,1,.3,1) both;
+        }
+        .hero-title .gold { color: var(--gold); font-style: italic; }
+
+        /* Sub-headline */
+        .hero-sub {
+            font-size: clamp(.95rem, 1.5vw, 1.15rem);
+            font-weight: 400; color: var(--dim); line-height: 1.7;
+            max-width: 540px; margin: 0 auto 2.6rem;
+            animation: fadeUp .7s .4s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        /* CTA Buttons */
+        .cta-group {
+            display: flex; align-items: center; gap: 1rem;
+            flex-wrap: wrap; justify-content: center;
+            animation: fadeUp .7s .5s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: .6rem;
+            padding: 1rem 2.2rem;
+            background: linear-gradient(135deg, var(--gold) 0%, #e0b020 100%);
+            border: none; border-radius: 50px;
+            color: var(--navy-deep); font-family: 'Outfit', sans-serif;
+            font-size: 1rem; font-weight: 800; letter-spacing: .3px;
+            text-decoration: none; cursor: pointer;
+            box-shadow: 0 4px 28px rgba(245,197,66,.45);
+            transition: var(--ease); position: relative; overflow: hidden;
+        }
+        .btn-primary::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,.25) 0%, transparent 60%);
+            opacity: 0; transition: opacity .3s;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(245,197,66,.55); }
+        .btn-primary:hover::before { opacity: 1; }
+        .btn-primary:active { transform: translateY(-1px); }
+
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: .6rem;
+            padding: 1rem 2.2rem;
+            background: rgba(255,255,255,.08); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,.28); border-radius: 50px;
+            color: #fff; font-family: 'Outfit', sans-serif;
+            font-size: 1rem; font-weight: 600; letter-spacing: .2px;
+            text-decoration: none; cursor: pointer;
+            transition: var(--ease);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,.15);
+            border-color: rgba(255,255,255,.5);
+            transform: translateY(-3px);
+        }
+
+        /* ===== STATS STRIP ===== */
+        .stats-strip {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            z-index: 2;
+            display: flex; justify-content: center; gap: 0;
+            padding: 0 3rem 1.8rem;
+            animation: fadeUp .7s .65s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .stat-card {
+            flex: 1; max-width: 180px;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 1.2rem 1rem;
+            position: relative;
+        }
+        .stat-card:not(:last-child)::after {
+            content: ''; position: absolute; right: 0; top: 20%; bottom: 20%;
+            width: 1px; background: rgba(255,255,255,.15);
+        }
+
+        .stat-num {
+            font-size: 2rem; font-weight: 900; color: var(--gold); line-height: 1;
+            margin-bottom: .25rem;
+        }
+        .stat-lbl {
+            font-size: .7rem; font-weight: 500; color: var(--muted);
+            letter-spacing: 1.2px; text-transform: uppercase;
+        }
+
+        /* ===== TRUST / SECURITY NOTE ===== */
+        .trust-note {
+            position: absolute; bottom: 3.5rem; left: 0; right: 0;
+            z-index: 2; /* hidden behind stats on desktop */
+            display: none; /* shown only on narrow viewports */
+            justify-content: center; align-items: center; gap: .5rem;
+            font-size: .72rem; color: var(--muted);
+        }
+        .trust-note i { color: var(--gold); }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center;
+            gap: .4rem; opacity: .45; animation: bounce 2s ease infinite;
+        }
+        .scroll-hint span { font-size: .62rem; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+        .scroll-hint i { font-size: .8rem; color: var(--gold); }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ===== FEATURES ROW (bottom of page on tall screens) ===== */
+        .features {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 3;
+            display: flex; justify-content: center; gap: 2.5rem;
+            padding: 1rem 2rem 1.4rem;
+            background: linear-gradient(to top, rgba(4,12,26,.92) 80%, transparent);
+        }
+
+        .feat {
+            display: flex; align-items: center; gap: .55rem;
+            font-size: .78rem; color: var(--dim);
+        }
+        .feat i { color: var(--gold); font-size: .85rem; }
+
+        /* ===== FADE UP KEYFRAME ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            .nav { padding: 1.2rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero-title { font-size: clamp(2.4rem, 11vw, 3.5rem); }
+            .stats-strip { display: none; }
+            .features { flex-wrap: wrap; gap: 1rem; padding: .8rem 1rem 1.2rem; }
+            .feat { font-size: .72rem; }
+        }
+
+        @media (max-width: 480px) {
+            .cta-group { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === FULL-SCREEN BG === -->
+    <div class="bg" aria-hidden="true">
+        <img src="images/airplane_wing_sunset.png" alt=""
+             onerror="this.src='images/airplane_wing_clouds.png'" />
+    </div>
+
+    <!-- === PARTICLES === -->
+    <div class="particles" id="particles" aria-hidden="true"></div>
+
+    <!-- === NAV === -->
+    <nav class="nav" role="navigation" aria-label="Primary">
+        <a href="welcome.html" class="nav-logo">
+            <img src="images/logo_gold.png" alt="Huzefa Airlines logo"
+                 onerror="this.style.display='none'" />
+            <div>
+                <div class="logo-name">HUZEFA</div>
+                <div class="logo-sub">Airlines Premium</div>
+            </div>
+        </a>
+        <div class="nav-links" role="list">
+            <a href="index.html" role="listitem">Home</a>
+            <a href="flights.html" role="listitem">Flights</a>
+            <a href="destinations.html" role="listitem">Destinations</a>
+            <a href="about.html" role="listitem">About</a>
+            <a href="contact.html" role="listitem">Contact</a>
+        </div>
+    </nav>
+
+    <!-- === HERO === -->
+    <section class="hero" aria-label="Welcome hero">
+
+        <!-- animated route decoration -->
+        <div class="route-line" aria-hidden="true">
+            <div class="route-dot"></div>
+            <div class="route-dash"></div>
+            <div class="route-plane"><i class="fa-solid fa-plane"></i></div>
+            <div class="route-dash right"></div>
+            <div class="route-dot"></div>
+        </div>
+
+        <!-- badge -->
+        <div class="hero-badge">
+            <i class="fa-solid fa-award"></i>
+            7-Star Aviation Experience
+        </div>
+
+        <!-- Main headline -->
+        <h1 class="hero-title">
+            Fly Beyond<br><span class="gold">Expectations</span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="hero-sub">
+            Welcome to the gateway of luxury world travel. Sign in or create an account to explore exclusive fares, manage your reservations, and unlock Huzefa Club rewards.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="cta-group">
+            <a href="login.html" class="btn-primary" id="welcomeLoginBtn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign In
+            </a>
+            <a href="signup.html" class="btn-outline" id="welcomeSignupBtn">
+                <i class="fa-solid fa-user-plus"></i>
+                Create Free Account
+            </a>
+        </div>
+
+        <!-- Stats strip -->
+        <div class="stats-strip" aria-label="Airline statistics">
+            <div class="stat-card">
+                <div class="stat-num">180+</div>
+                <div class="stat-lbl">Destinations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">2M+</div>
+                <div class="stat-lbl">Passengers Served</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">98%</div>
+                <div class="stat-lbl">On-Time Flights</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">4.9★</div>
+                <div class="stat-lbl">Avg Passenger Rating</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- === BOTTOM FEATURE ROW === -->
+    <footer class="features" aria-label="Key features">
+        <div class="feat"><i class="fa-solid fa-shield-halved"></i> 256-Bit Encrypted Gateway</div>
+        <div class="feat"><i class="fa-solid fa-bolt"></i> Instant Booking Confirmation</div>
+        <div class="feat"><i class="fa-solid fa-coins"></i> Earn Huzefa Miles Every Flight</div>
+        <div class="feat"><i class="fa-solid fa-headset"></i> 24/7 Passenger Support</div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script>
+        /* Auto-redirect if already logged in */
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof checkAutoLoginRedirect === 'function') {
+                checkAutoLoginRedirect();
+            }
+        });
+
+        /* Spawn floating particles */
+        (function () {
+            var c = document.getElementById('particles');
+            if (!c) return;
+            for (var i = 0; i < 18; i++) {
+                var el = document.createElement('span');
+                var s  = Math.random() * 100 + 20;
+                el.style.cssText =
+                    'width:'  + s + 'px;' +
+                    'height:' + s + 'px;' +
+                    'left:'   + (Math.random() * 100) + '%;' +
+                    'animation-duration:' + (Math.random() * 22 + 14) + 's;' +
+                    'animation-delay:'    + (-Math.random() * 28) + 's;';
+                c.appendChild(el);
+            }
+        })();
+    </script>
+
+</body>
+</html>

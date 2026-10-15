@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Admin Portal - Huzefa Airlines</title>
+    <meta name="description" content="Official Executive Admin Control Center for Huzefa Airlines flight operations and passenger management." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body style="background: #061126; color: var(--white); min-height: 100vh;">
+
+    <!-- Non-Admin Access Denied Overlay (Displayed if not logged in as huzefaairline@gmail.com) -->
+    <div id="adminAccessDeniedBanner" style="display: none; position: fixed; inset: 0; background: rgba(4, 12, 26, 0.96); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 2rem;">
+        <div class="glass-card text-center" style="max-width: 500px; width: 100%; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem auto;">
+                <i class="fa-solid fa-user-slash"></i>
+            </div>
+            <h2 style="font-size: 2rem; color: var(--white); margin-bottom: 0.5rem;">Access Denied</h2>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-bottom: 1.5rem;" id="accessDeniedMsg">
+                Strict Admin Access Control: Only <strong>huzefaairline@gmail.com</strong> is authorized to view this Executive Admin Portal.
+            </p>
+            <div class="badge" style="background: #ef4444; color: var(--white); font-weight: 700; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; display: inline-block; margin-bottom: 1.5rem;">
+                Redirecting to Home Page in <span id="redirectCountdown">3</span> seconds...
+            </div>
+            <div>
+                <a href="index.html" class="btn btn-primary" style="padding: 0.7rem 1.5rem; font-size: 0.9rem;">Return Home Immediately</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header sticky" id="header" style="background: rgba(6, 17, 38, 0.95); border-bottom: 1px solid rgba(245, 197, 66, 0.3);">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_gold.png" alt="Huzefa Airlines Emblem" class="logo-img" />
+                <div class="logo-text">
+                    <span class="brand-name" style="color: var(--white);">HUZEFA</span>
+                    <span class="brand-sub">AIRLINES ADMIN</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link" style="color: var(--white);">Main Site</a>
+                <a href="admin.html" class="nav-link active" style="color: var(--gold); font-weight:700;"><i class="fa-solid fa-chart-line"></i> Operations Dashboard</a>
+                <a href="dashboard.html" class="nav-link" style="color: var(--white);">Passenger View</a>
+            </nav>
+
+            <div class="nav-auth-buttons" id="navAuthContainers">
+                <button type="button" class="btn btn-secondary" onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">
+                    <i class="fa-solid fa-power-off"></i> Log Out
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Dashboard Main Layout -->
+    <main id="adminMainContent" style="padding-top: 7rem; padding-bottom: 4rem;">
+        <div class="container">
+
+            <!-- Admin Banner Header -->
+            <div class="glass-card" style="padding: 2rem; background: linear-gradient(135deg, rgba(7, 26, 61, 0.9), rgba(11, 77, 184, 0.7)); border: 1px solid var(--gold); border-radius: 18px; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <span class="badge" style="background: var(--gold); color: var(--navy); font-weight: 800; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;">
+                        <i class="fa-solid fa-shield-halved"></i> Executive Admin Control Center
+                    </span>
+                    <h1 style="font-size: 2.2rem; color: var(--white); margin-top: 0.5rem;" id="adminWelcomeHeader">Huzefa Operations Command</h1>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 0.95rem;">Authenticated as: <strong style="color: var(--gold);" id="adminEmailDisplay">huzefaairline@gmail.com</strong></p>
+                </div>
+                <div style="display: flex; gap: 0.8rem;">
+                    <button type="button" class="btn btn-primary" onclick="alert('Add New Flight modal triggered');" style="font-size: 0.88rem;">+ Create Flight</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.reload();" style="font-size: 0.88rem; color: var(--white); border-color: rgba(255,255,255,0.3);"><i class="fa-solid fa-rotate"></i> Sync Data</button>
+                </div>
+            </div>
+
+            <!-- Stats Overview Cards Grid -->
+            <div class="grid grid-4" style="gap: 1.5rem; margin-bottom: 2.5rem;">
+                
+                <div class="glass-card" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                        <span style="color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 500;">Total Passengers</span>
+                        <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(11, 77, 184, 0.25); color: var(--royal-blue); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                    </div>
+                    <div style="font-size: 2.2rem; font-weight: 800; color: var(--white);" id="adminStatUsers">1,248</div>
+                    <div style="font-size: 0.78rem; color: #22c55e; margin-top: 0.4rem;"><i class="fa-solid fa-arrow-trend-up"></i> +14% this month</div>
+                </div>
+
+                <div class="glass-card" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(245, 197, 66, 0.3); border-radius: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                        <span style="color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 500;">Active Bookings</span>
+                        <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(245, 197, 66, 0.2); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fa-solid fa-ticket"></i>
+                        </div>
+                    </div>
+                    <div style="font-size: 2.2rem; font-weight: 800; color: var(--gold);" id="adminStatBookings">342</div>
+                    <div style="font-size: 0.78rem; color: #22c55e; margin-top: 0.4rem;"><i class="fa-solid fa-arrow-trend-up"></i> +8% compared to yesterday</div>
+                </div>
+
+                <div class="glass-card" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                        <span style="color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 500;">Revenue Generated</span>
+                        <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(34, 197, 94, 0.2); color: #22c55e; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div style="font-size: 2.2rem; font-weight: 800; color: #22c55e;" id="adminStatRevenue">$266,760</div>
+                    <div style="font-size: 0.78rem; color: #22c55e; margin-top: 0.4rem;"><i class="fa-solid fa-circle-check"></i> Processed via Stripe</div>
+                </div>
+
+                <div class="glass-card" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                        <span style="color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 500;">Active Fleet Aircraft</span>
+                        <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(59, 130, 246, 0.2); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                            <i class="fa-solid fa-plane"></i>
+                        </div>
+                    </div>
+                    <div style="font-size: 2.2rem; font-weight: 800; color: var(--white);" id="adminStatFleet">5 Airplanes</div>
+                    <div style="font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 0.4rem;">100% Operational Health</div>
+                </div>
+
+            </div>
+
+            <!-- Tables Grid Section -->
+            <div class="grid grid-2" style="gap: 2rem;">
+                
+                <!-- Recent Bookings Table -->
+                <div class="glass-card" style="padding: 1.8rem; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+                        <h3 style="font-size: 1.2rem; color: var(--white);"><i class="fa-solid fa-ticket text-gold"></i> Recent Flight Bookings</h3>
+                        <span class="badge" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);">Live API</span>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.15); color: var(--gold);">
+                                    <th style="padding: 0.6rem;">PNR</th>
+                                    <th style="padding: 0.6rem;">Passenger</th>
+                                    <th style="padding: 0.6rem;">Flight</th>
+                                    <th style="padding: 0.6rem;">Class</th>
+                                    <th style="padding: 0.6rem; text-align: right;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminBookingsTbody">
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                                    <td style="padding: 0.8rem; font-weight: 700; color: var(--gold);">HZ-984210</td>
+                                    <td style="padding: 0.8rem;">Sarah Jenkins</td>
+                                    <td style="padding: 0.8rem;">HZ-101</td>
+                                    <td style="padding: 0.8rem;">Business</td>
+                                    <td style="padding: 0.8rem; text-align: right; color: #22c55e; font-weight: 700;">Confirmed</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                                    <td style="padding: 0.8rem; font-weight: 700; color: var(--gold);">HZ-741092</td>
+                                    <td style="padding: 0.8rem;">Michael Chen</td>
+                                    <td style="padding: 0.8rem;">HZ-340</td>
+                                    <td style="padding: 0.8rem;">Economy</td>
+                                    <td style="padding: 0.8rem; text-align: right; color: #22c55e; font-weight: 700;">Confirmed</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                                    <td style="padding: 0.8rem; font-weight: 700; color: var(--gold);">HZ-512089</td>
+                                    <td style="padding: 0.8rem;">Emma Watson</td>
+                                    <td style="padding: 0.8rem;">HZ-205</td>
+                                    <td style="padding: 0.8rem;">First Class</td>
+                                    <td style="padding: 0.8rem; text-align: right; color: #22c55e; font-weight: 700;">Confirmed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Registered Users Table -->
+                <div class="glass-card" style="padding: 1.8rem; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+                        <h3 style="font-size: 1.2rem; color: var(--white);"><i class="fa-solid fa-users text-gold"></i> Registered Users (MySQL)</h3>
+                        <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">DB Synced</span>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.15); color: var(--gold);">
+                                    <th style="padding: 0.6rem;">ID</th>
+                                    <th style="padding: 0.6rem;">Full Name</th>
+                                    <th style="padding: 0.6rem;">Email</th>
+                                    <th style="padding: 0.6rem; text-align: right;">Role</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUsersTbody">
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                                    <td style="padding: 0.8rem;">#1</td>
+                                    <td style="padding: 0.8rem; font-weight: 600;">Huzefa Admin</td>
+                                    <td style="padding: 0.8rem; color: var(--gold);">huzefaairline@gmail.com</td>
+                                    <td style="padding: 0.8rem; text-align: right;"><span class="badge" style="background: var(--gold); color: var(--navy); font-weight: 800;">ADMIN</span></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                                    <td style="padding: 0.8rem;">#2</td>
+                                    <td style="padding: 0.8rem; font-weight: 600;">Guest Traveler</td>
+                                    <td style="padding: 0.8rem;">guest@huzefaairlines.com</td>
+                                    <td style="padding: 0.8rem; text-align: right;"><span class="badge" style="background: rgba(255,255,255,0.1); color: var(--white);">Customer</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: rgba(4, 12, 26, 0.95); border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Huzefa Airlines Executive Admin System. Confidential Internal Portal.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Run strict page access control on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof checkAdminPageGuard === 'function') {
+                checkAdminPageGuard();
+            }
+        });
+    </script>
+</body>
+</html>

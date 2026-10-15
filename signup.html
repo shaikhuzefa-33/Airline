@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account — Huzefa Airlines</title>
+    <meta name="description" content="Join Huzefa Airlines – register for a free account to unlock exclusive fares, earn Huzefa Miles, and access your Huzefa Club benefits." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        /* ---- Tokens ---- */
+        :root {
+            --navy-deep:  #040c1a;
+            --navy:       #071a3d;
+            --gold:       #f5c542;
+            --gold-dim:   rgba(245,197,66,.12);
+            --glass:      rgba(255,255,255,.07);
+            --border:     rgba(255,255,255,.13);
+            --dim:        rgba(255,255,255,.58);
+            --muted:      rgba(255,255,255,.3);
+            --r:          14px;
+            --ease:       all .3s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ---- Reset ---- */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { font-family:'Outfit',-apple-system,sans-serif; background:var(--navy-deep); }
+        body { overflow-x:hidden; min-height:100vh; }
+
+        /* ===== Two-column shell ===== */
+        .page {
+            display: flex;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* ===== LEFT – Scenic ===== */
+        .scenic {
+            flex: 0 0 55%;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .scenic img.bg {
+            position: absolute;
+            inset: 0; width:100%; height:100%;
+            object-fit: cover;
+            transform: scale(1.06);
+            transition: transform 10s ease;
+            filter: brightness(.6);
+        }
+        .page:hover .scenic img.bg { transform: scale(1.0); }
+
+        .scenic::before {
+            content:''; position:absolute; inset:0; z-index:1;
+            background: linear-gradient(150deg,
+                rgba(4,12,26,.7) 0%,
+                rgba(7,26,61,.28) 55%,
+                transparent 100%);
+        }
+        .scenic::after {
+            content:''; position:absolute; top:0; right:0; bottom:0;
+            width:100px; z-index:2;
+            background: linear-gradient(to right, transparent, var(--navy-deep));
+        }
+
+        .scenic-body {
+            position:absolute; inset:0; z-index:3;
+            display:flex; flex-direction:column; justify-content:space-between;
+            padding: 2.6rem 3rem;
+        }
+
+        .s-logo { display:flex; align-items:center; gap:.9rem; }
+        .s-logo img { width:44px; height:44px; object-fit:contain; filter:drop-shadow(0 0 10px rgba(245,197,66,.6)); }
+        .s-name { font-size:1.15rem; font-weight:800; color:#fff; letter-spacing:3px; line-height:1; }
+        .s-sub  { font-size:.6rem; font-weight:600; color:var(--gold); letter-spacing:2.5px; text-transform:uppercase; margin-top:3px; }
+
+
+
+        .s-badge {
+            display:inline-flex; align-items:center; gap:.45rem;
+            background:var(--gold-dim); border:1px solid rgba(245,197,66,.28);
+            border-radius:50px; padding:.3rem .85rem;
+            font-size:.67rem; font-weight:700; color:var(--gold);
+            letter-spacing:1.5px; text-transform:uppercase;
+            margin-bottom:1rem; backdrop-filter:blur(10px);
+        }
+        .s-h1 {
+            font-family:'Playfair Display',serif;
+            font-size:clamp(1.9rem,2.8vw,2.6rem);
+            font-weight:700; color:#fff; line-height:1.22;
+            text-shadow:0 2px 24px rgba(0,0,0,.5);
+            margin-bottom:1.5rem;
+        }
+        .s-h1 span { color:var(--gold); }
+
+        .perks { display:flex; flex-direction:column; gap:.75rem; }
+        .perk  { display:flex; align-items:center; gap:.8rem; font-size:.83rem; color:rgba(255,255,255,.74); }
+        .perk-ico {
+            width:32px; height:32px; border-radius:50%; flex-shrink:0;
+            display:flex; align-items:center; justify-content:center;
+            background:var(--gold-dim); border:1px solid rgba(245,197,66,.22);
+            color:var(--gold); font-size:.78rem;
+        }
+
+        /* ===== RIGHT – Form ===== */
+        .panel {
+            flex: 0 0 45%;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 2.8rem 2.5rem;
+            background: var(--navy-deep);
+        }
+
+        .panel::before {
+            content:''; position:fixed; top:-20%; right:0;
+            width:420px; height:420px; pointer-events:none;
+            background:radial-gradient(circle,rgba(11,77,184,.14) 0%,transparent 70%);
+        }
+        .panel::after {
+            content:''; position:fixed; bottom:-15%; right:5%;
+            width:360px; height:360px; pointer-events:none;
+            background:radial-gradient(circle,rgba(245,197,66,.07) 0%,transparent 70%);
+        }
+
+        /* particles */
+        .ptcl { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+        .ptcl span {
+            position:absolute; border-radius:50%;
+            background:rgba(245,197,66,.06);
+            animation:rise linear infinite;
+        }
+        @keyframes rise {
+            from { transform:translateY(105vh) scale(0); opacity:0; }
+            10%  { opacity:1; }
+            90%  { opacity:.3; }
+            to   { transform:translateY(-10vh) scale(1); opacity:0; }
+        }
+
+        /* card */
+        .card {
+            position:relative; z-index:1;
+            width:100%; max-width:420px;
+            padding: .5rem 0 2rem;
+            animation:enter .65s cubic-bezier(.16,1,.3,1) both;
+        }
+        @keyframes enter {
+            from { opacity:0; transform:translateY(28px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+
+        /* header */
+        .c-head { margin-bottom:1.7rem; }
+        .eyebrow {
+            display:inline-flex; align-items:center; gap:.45rem;
+            font-size:.7rem; font-weight:700; color:var(--gold);
+            letter-spacing:2px; text-transform:uppercase; margin-bottom:.6rem;
+        }
+        .eyebrow::before { content:''; display:block; width:18px; height:2px; background:var(--gold); border-radius:2px; }
+        .c-head h1 { font-size:1.9rem; font-weight:800; color:#fff; margin-bottom:.4rem; }
+        .c-head p  { font-size:.84rem; color:var(--dim); line-height:1.6; }
+
+        /* alert */
+        .alert {
+            display:none; align-items:flex-start; gap:.65rem;
+            padding:.75rem 1rem; border-radius:var(--r);
+            margin-bottom:1rem; font-size:.82rem; line-height:1.5;
+            animation:pop .3s ease;
+        }
+        @keyframes pop {
+            from { opacity:0; transform:translateY(-5px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .alert.err { background:rgba(239,68,68,.13); border:1px solid rgba(239,68,68,.3); color:#fca5a5; }
+        .alert.ok  { background:rgba(34,197,94,.13);  border:1px solid rgba(34,197,94,.3);  color:#86efac; }
+        .alert i   { flex-shrink:0; font-size:.92rem; margin-top:2px; }
+
+        /* fields */
+        .field { margin-bottom:.95rem; }
+        .field label {
+            display:flex; align-items:center; gap:.45rem;
+            font-size:.72rem; font-weight:600; color:var(--dim);
+            letter-spacing:.5px; text-transform:uppercase; margin-bottom:.43rem;
+        }
+        .field label i { color:var(--gold); font-size:.76rem; }
+
+        /* two column row */
+        .f2 { display:grid; grid-template-columns:1fr 1fr; gap:.9rem; }
+
+        .field input {
+            width:100%; padding:.78rem 1rem;
+            background:var(--glass); border:1px solid var(--border);
+            border-radius:var(--r); color:#fff;
+            font-family:'Outfit',sans-serif; font-size:.92rem;
+            outline:none; transition:var(--ease); backdrop-filter:blur(8px);
+        }
+        .field input::placeholder { color:var(--muted); }
+        .field input:hover:not(:focus) { border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.09); }
+        .field input:focus {
+            background:rgba(255,255,255,.1); border-color:var(--gold);
+            box-shadow:0 0 0 3px var(--gold-dim), 0 4px 14px rgba(245,197,66,.09);
+        }
+
+        /* password */
+        .pw { position:relative; }
+        .pw input { padding-right:3rem; }
+        .eye {
+            position:absolute; right:.85rem; top:50%; transform:translateY(-50%);
+            background:none; border:none; color:var(--muted); cursor:pointer;
+            font-size:.87rem; padding:.3rem; display:flex; align-items:center; transition:color .2s;
+        }
+        .eye:hover { color:var(--gold); }
+
+        /* strength */
+        .s-bar { height:4px; border-radius:4px; background:rgba(255,255,255,.1); margin-top:.48rem; overflow:hidden; }
+        .s-fill { height:100%; border-radius:4px; width:0; transition:width .4s ease, background .4s ease; }
+        .s-lbl  { font-size:.7rem; color:var(--muted); margin-top:3px; text-align:right; transition:color .3s; }
+
+        /* terms */
+        .terms { display:flex; align-items:flex-start; gap:.55rem; margin-top:.7rem; }
+        .terms input { width:16px; height:16px; accent-color:var(--gold); cursor:pointer; flex-shrink:0; margin-top:2px; }
+        .terms span  { font-size:.77rem; color:var(--dim); line-height:1.5; }
+        .terms a { color:var(--gold); text-decoration:none; font-weight:600; }
+        .terms a:hover { text-decoration:underline; }
+
+        /* submit */
+        .btn-go {
+            width:100%; padding:.92rem 1.5rem; margin-top:.7rem;
+            background:linear-gradient(135deg,var(--gold) 0%,#e0b020 100%);
+            border:none; border-radius:var(--r);
+            color:#040c1a; font-family:'Outfit',sans-serif;
+            font-size:.96rem; font-weight:800; letter-spacing:.4px;
+            cursor:pointer; position:relative; overflow:hidden;
+            display:flex; align-items:center; justify-content:center; gap:.55rem;
+            box-shadow:0 4px 22px rgba(245,197,66,.3);
+            transition:var(--ease);
+        }
+        .btn-go::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(135deg,rgba(255,255,255,.22) 0%,transparent 60%);
+            opacity:0; transition:opacity .3s;
+        }
+        .btn-go:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 8px 30px rgba(245,197,66,.46); }
+        .btn-go:hover::before { opacity:1; }
+        .btn-go:active:not(:disabled) { transform:translateY(0); }
+        .btn-go:disabled { opacity:.65; cursor:not-allowed; }
+
+        /* footer */
+        .c-foot { text-align:center; margin-top:1.6rem; }
+        .c-foot p { font-size:.83rem; color:var(--dim); }
+        .c-foot a { color:var(--gold); font-weight:700; text-decoration:none; }
+        .c-foot a:hover { text-decoration:underline; }
+        .back {
+            display:inline-flex; align-items:center; gap:.4rem;
+            margin-top:.85rem; font-size:.75rem; color:var(--muted);
+            text-decoration:none; transition:color .2s;
+        }
+        .back:hover { color:var(--dim); }
+
+        /* trust */
+        .trust {
+            display:flex; align-items:center; justify-content:center; gap:1.2rem;
+            margin-top:1.5rem; padding-top:1.2rem;
+            border-top:1px solid var(--border);
+        }
+        .trust-i { display:flex; align-items:center; gap:.35rem; font-size:.66rem; color:var(--muted); }
+        .trust-i i { color:var(--gold); font-size:.7rem; }
+
+        /* ===== Responsive ===== */
+        @media (max-width:920px) {
+            .page { flex-direction:column; }
+            .scenic { display:none; }
+            .panel { flex:none; width:100%; min-height:100vh; padding:2.5rem 1.5rem; align-items:flex-start; }
+        }
+        @media (max-width:480px) {
+            .f2 { grid-template-columns:1fr; }
+            .c-head h1 { font-size:1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- LEFT: Scenic -->
+    <aside class="scenic" aria-hidden="true">
+        <img class="bg" src="images/airplane_wing_clouds.png" alt=""
+             onerror="this.src='images/airplane_wing_sunset.png'" />
+        <div class="scenic-body">
+
+            <div class="s-logo">
+                <img src="images/logo_gold.png" alt="" onerror="this.style.display='none'" />
+                <div>
+                    <div class="s-name">HUZEFA</div>
+                    <div class="s-sub">Airlines Premium</div>
+                </div>
+            </div>
+
+            <div class="s-foot">
+                <div class="s-badge"><i class="fa-solid fa-star"></i> Huzefa Club</div>
+                <h2 class="s-h1">Start Your<br><span>Journey Today</span></h2>
+                <div class="perks">
+                    <div class="perk">
+                        <div class="perk-ico"><i class="fa-solid fa-tag"></i></div>
+                        Exclusive member-only fares
+                    </div>
+                    <div class="perk">
+                        <div class="perk-ico"><i class="fa-solid fa-coins"></i></div>
+                        Earn Huzefa Miles on every flight
+                    </div>
+                    <div class="perk">
+                        <div class="perk-ico"><i class="fa-solid fa-calendar-check"></i></div>
+                        Manage bookings from anywhere
+                    </div>
+                    <div class="perk">
+                        <div class="perk-ico"><i class="fa-solid fa-headset"></i></div>
+                        Priority 24/7 passenger support
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- RIGHT: Form -->
+    <main class="panel">
+        <div class="ptcl" id="ptcl" aria-hidden="true"></div>
+
+        <div class="card">
+
+            <div class="c-head">
+                <div class="eyebrow">Membership Registration</div>
+                <h1>Create Account</h1>
+                <p>Register to unlock exclusive fares and earn Huzefa Miles on every booking.</p>
+            </div>
+
+            <div id="signupAlert" class="alert" role="alert"></div>
+
+            <form id="signupForm" novalidate>
+
+                <!-- Full name -->
+                <div class="field">
+                    <label for="fullName"><i class="fa-solid fa-user"></i> Full Name</label>
+                    <input type="text" id="fullName" placeholder="e.g. Sarah Jenkins" autocomplete="name" required />
+                </div>
+
+                <!-- Email + Phone side-by-side -->
+                <div class="f2">
+                    <div class="field">
+                        <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+                        <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required />
+                    </div>
+                    <div class="field">
+                        <label for="phone"><i class="fa-solid fa-phone"></i> Phone</label>
+                        <input type="tel" id="phone" placeholder="+1 555 0100" autocomplete="tel" />
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="field">
+                    <label for="password"><i class="fa-solid fa-lock"></i> Password (min. 8 chars)</label>
+                    <div class="pw">
+                        <input type="password" id="password" placeholder="Create a strong password"
+                               autocomplete="new-password" oninput="updateStrength(this.value)" required />
+                        <button type="button" class="eye"
+                                onclick="togglePasswordVisibility('password', this)"
+                                aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="s-bar"><div class="s-fill" id="sFill"></div></div>
+                    <div class="s-lbl" id="sLbl">Strength: —</div>
+                </div>
+
+                <!-- Confirm password -->
+                <div class="field">
+                    <label for="confirmPassword"><i class="fa-solid fa-shield-halved"></i> Confirm Password</label>
+                    <div class="pw">
+                        <input type="password" id="confirmPassword" placeholder="Re-enter your password"
+                               autocomplete="new-password" required />
+                        <button type="button" class="eye"
+                                onclick="togglePasswordVisibility('confirmPassword', this)"
+                                aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="terms">
+                    <input type="checkbox" id="agreeTerms" />
+                    <span>I agree to Huzefa Airlines'
+                        <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </span>
+                </div>
+
+                <button type="submit" id="signupSubmitBtn" class="btn-go">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Complete Registration
+                </button>
+
+            </form>
+
+            <div class="c-foot">
+                <p>Already have an account? <a href="login.html">Sign in</a></p>
+                <a href="welcome.html" class="back">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Welcome
+                </a>
+            </div>
+
+            <div class="trust">
+                <div class="trust-i"><i class="fa-solid fa-shield-halved"></i> 256-bit SSL</div>
+                <div class="trust-i"><i class="fa-solid fa-lock"></i> Encrypted</div>
+                <div class="trust-i"><i class="fa-solid fa-user-shield"></i> GDPR Safe</div>
+            </div>
+
+        </div>
+    </main>
+
+</div><!-- /.page -->
+
+<script src="auth.js"></script>
+<script>
+    /* Particles */
+    !function(){
+        var c=document.getElementById('ptcl');
+        if(!c) return;
+        for(var i=0;i<12;i++){
+            var el=document.createElement('span');
+            var s=Math.random()*80+20;
+            el.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(Math.random()*100)+'%;'+
+                             'animation-duration:'+(Math.random()*20+14)+'s;'+
+                             'animation-delay:'+(-Math.random()*24)+'s;';
+            c.appendChild(el);
+        }
+    }();
+
+    /* Auto-redirect */
+    document.addEventListener('DOMContentLoaded',function(){
+        if(typeof checkAutoLoginRedirect==='function') checkAutoLoginRedirect();
+    });
+
+    /* Password strength */
+    function updateStrength(val){
+        var fill=document.getElementById('sFill');
+        var lbl =document.getElementById('sLbl');
+        if(!fill||!lbl) return;
+        if(!val){ fill.style.width='0'; lbl.textContent='Strength: —'; lbl.style.color=''; return; }
+
+        var sc=0;
+        if(val.length>=8)  sc++;
+        if(val.length>=12) sc++;
+        if(/[A-Z]/.test(val)) sc++;
+        if(/[0-9]/.test(val)) sc++;
+        if(/[^A-Za-z0-9]/.test(val)) sc++;
+
+        var lvls=[
+            {w:'20%',c:'#ef4444',t:'Weak'},
+            {w:'40%',c:'#f97316',t:'Fair'},
+            {w:'60%',c:'#eab308',t:'Good'},
+            {w:'80%',c:'#22c55e',t:'Strong'},
+            {w:'100%',c:'#16a34a',t:'Excellent'}
+        ];
+        var l=lvls[Math.min(sc-1,4)]||lvls[0];
+        fill.style.width=l.w; fill.style.background=l.c;
+        lbl.textContent='Strength: '+l.t; lbl.style.color=l.c;
+    }
+
+    /* Alias for auth.js compatibility */
+    window.checkPasswordStrength = function(v){ updateStrength(v); };
+</script>
+
+</body>
+</html>
